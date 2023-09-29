@@ -62,9 +62,13 @@ from pyspark.sql.functions import *
 df = df.withColumn('clean_salary', df.Salary.substr(2,1000).cast('float') )
 df.show()
 
+"""GroupBy Gender and Sum """
+
 import pyspark.sql.functions as sqlfunc
 df1 = df.groupBy('gender').agg(sqlfunc.sum('clean_salary'))
 df1.show()
+
+"""GroupBy Gender """
 
 import pyspark.sql.functions as sqlfunc
 df1 = df.groupBy('gender').agg( sqlfunc.sum('clean_salary').alias('Total'),
@@ -72,6 +76,8 @@ df1 = df.groupBy('gender').agg( sqlfunc.sum('clean_salary').alias('Total'),
                                 sqlfunc.min('clean_salary').alias('Minimum'),
                                 sqlfunc.max('clean_salary').alias('Maximum'))
 df1.show()
+
+"""GroupBy Gender and City"""
 
 import pyspark.sql.functions as sqlfunc
 df1 = df.groupBy('gender','City').agg( sqlfunc.sum('clean_salary').alias('Total'),
